@@ -1,0 +1,14 @@
+/*
+Theme Name: TOGU News
+Theme URI: https://togu.example.com/
+Author: TOGU / Marvle
+Description: TOGU - Body Design Spa の NEWS（お知らせ）専用 WordPress テーマ。静的サイトのデザインに合わせた一覧・カテゴリー・月別アーカイブ・記事詳細テンプレートを提供します。本文の CSS は静的サイトの assets/css/style.css を共有します（functions.php の TOGU_SITE_BASE で参照先を指定）。
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+Text Domain: togu-news
+*/
+
+/* 実際のスタイルは静的サイトの assets/css/style.css を読み込みます（functions.php 参照）。
+   このファイルは WordPress テーマとして認識させるためのヘッダー用です。
+   テーマ固有の微調整が必要な場合のみ、以下に追記してください。 */

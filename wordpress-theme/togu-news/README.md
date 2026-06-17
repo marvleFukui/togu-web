@@ -1,0 +1,64 @@
+# TOGU News（WordPress テーマ）
+
+TOGU - Body Design Spa の **NEWS（お知らせ）専用** WordPress テーマです。
+静的サイト（TOP・CONCEPT 等）はそのまま、NEWS だけを WordPress で投稿・運用するための構成になっています。
+
+## 構成ファイル
+- `style.css` … テーマ情報ヘッダー（実スタイルは静的サイトの `assets/css/style.css` を共有）
+- `functions.php` … スタイル/スクリプト読み込み、アーカイブツリー、ページネーション等
+- `header.php` / `footer.php` … 共通ヘッダー・フッター（静的サイトと同じデザイン）
+- `sidebar.php` … CATEGORY / ARCHIVES サイドバー
+- `index.php` … NEWS 一覧（添付デザイン）
+- `archive.php` … カテゴリー別・月別アーカイブ一覧
+- `single.php` … 記事詳細（※詳細デザインは別途調整予定の簡易版）
+- `template-parts/news-card.php` … 一覧カード1件分の共通パーツ
+
+## 設置手順
+1. **静的サイトを公開**（例：`https://togu.com/` 直下に `index.html` や `assets/`, `images/` を配置）。
+2. **WordPress をサブディレクトリに設置**（例：`https://togu.com/news/`）。
+   - 別ドメイン／別パスにする場合は `functions.php` の `TOGU_SITE_BASE` を実際の静的サイトURL（`assets` と `images` がある場所）に変更してください。デフォルトは `'/'`（＝ドメイン直下）。
+3. このフォルダ `togu-news` を `wp-content/themes/` にアップロードし、管理画面 **外観 → テーマ** で有効化。
+4. 管理画面 **設定 → パーマリンク** を「投稿名」など任意の形式で保存（リライト更新のため一度保存）。
+5. **カテゴリー**を作成（例：`NEWS` / `BLOG` / `MEDIA`）。一覧左側のバッジには記事の代表カテゴリー名が表示されます。
+6. **投稿**を作成。アイキャッチ画像が一覧・詳細のサムネイルになります（未設定時はグレーのプレースホルダー）。
+
+## 投稿の運用
+- **投稿 → 新規追加** で本文・カテゴリー・アイキャッチを設定して公開するだけで一覧に反映されます。
+- 抜粋（MOREの前の本文）は本文先頭から自動生成されます。手動で設定したい場合は投稿編集画面の「抜粋」欄に入力してください。
+- 左サイドの ARCHIVES（年＞月・件数）は投稿日から自動生成されます。最新の年が開いた状態で表示されます。
+
+## CONTACT（お問い合わせフォーム / Contact Form 7）
+お問い合わせは **Contact Form 7（CF7）** プラグインで作成します。
+
+### 手順
+1. プラグイン **Contact Form 7** をインストール・有効化。
+2. **お問い合わせ → 新規追加**。`contact-form-cf7.txt` の【フォーム】と【メール】をそれぞれのタブに貼り付けて保存。
+   - 「メール」タブの送信先（To）を実際の受信アドレスに変更してください。
+3. 保存後に表示される **ショートコード**（例: `[contact-form-7 id="123" title="お問い合わせ"]`）をコピー。
+4. **固定ページ → 新規追加**でページを作成（タイトル例: お問い合わせ、スラッグ例: `contact`）。
+   - 本文に 3 のショートコードを貼り付け。
+   - 右側「ページ属性 → テンプレート」で **「Contact (TOGU)」** を選択して公開。
+5. これで `page-contact.php` がデザイン（CONTACT / お問い合わせ見出し＋フォーム枠）を適用します。CSS は静的サイトの `assets/css/style.css`（`.contact-form` / `.cform` ブロック）を共有。
+
+### サンクスページ（送信完了ページ）
+送信が完了すると、サンクスページへ自動で遷移します。
+1. **固定ページ**を作成（タイトル例: お問い合わせありがとうございます、スラッグ例: `thanks`）。
+   - テンプレートに **「Thanks (TOGU)」** を選択。本文は空でOK（既定メッセージ表示）。任意で本文を書くとその内容を表示。
+2. 遷移先URLを `assets/js/config.js` の `THANKS_URL` に設定。
+   - 例: WordPress固定ページなら `THANKS_URL: "/news/thanks/"`、静的なら `"thanks.html"`（既定）。
+3. 仕組み: `assets/js/main.js` が CF7 の送信完了イベント `wpcf7mailsent` を検知し、`THANKS_URL` へリダイレクトします（CF7のページに `main.js` が読み込まれている前提＝本テーマなら自動）。
+   - ※「確認画面へ」のアドオンを使う場合も、最終送信完了時に `wpcf7mailsent` が発火するため同様に遷移します。
+
+### 「確認画面へ」について
+CF7 単体には確認画面機能がありません（押すと即送信）。確認画面が必要な場合は
+「Contact Form 7 Multi-Step Forms」等のアドオンを追加し、ボタンを差し替えてください。
+不要であれば文言を `[submit "送信する"]` に変更推奨（詳細は `contact-form-cf7.txt` 参照）。
+
+### フッターの CONTACT リンク
+`footer.php` の CONTACT リンクは既定で `TOGU_SITE_BASE . 'contact.html'`（静的）を指します。
+お問い合わせを WordPress 固定ページで運用する場合は、そのページURL（例: `/news/contact/`）に差し替えてください。
+
+## メモ
+- ヘッダー/フッター/ドロワー/アーカイブ開閉などの挙動は静的サイトと同じ `assets/js/main.js` を共有しています。
+- 外部リンク（LINE / Instagram / Facebook）は `assets/js/config.js` で一元管理され、`data-link` 属性に自動注入されます。
+- `contact.html` は WP なしで見た目を確認できる静的プレビューです（送信は動作しません）。本番は CF7 を使用します。

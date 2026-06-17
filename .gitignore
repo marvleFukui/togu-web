@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+**/.DS_Store
+
+# Design source files (not part of the deployed site)
+*.pdf
+*.png
+
+# Tooling
+.claude/
+node_modules/
+.vercel/
+
+# Editor notes
+togu_フォント_外部リンク.txt

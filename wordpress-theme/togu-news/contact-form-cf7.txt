@@ -1,0 +1,105 @@
+==========================================================
+ TOGU CONTACT — Contact Form 7 設定用
+==========================================================
+
+WordPress 管理画面 → お問い合わせ → 新規追加 を開き、
+下記【フォーム】と【メール】をそれぞれのタブにコピペしてください。
+保存後に発行されるショートコード [contact-form-7 id="..." title="..."] を
+固定ページ（テンプレート: Contact (TOGU)）の本文に貼り付けます。
+
+
+----------------------------------------------------------
+【フォーム】タブ — 以下をすべて貼り付け
+----------------------------------------------------------
+<div class="cform">
+
+  <div class="cform__row">
+    <div class="cform__label">件名 <span class="req">- 必須</span></div>
+    <div class="cform__field">
+      [select* subject "施術について" "サロンについて" "予約について" "その他お問い合わせ"]
+    </div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">氏名 <span class="req">- 必須</span></div>
+    <div class="cform__field">[text* your-name]</div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">フリガナ <span class="req">- 必須</span></div>
+    <div class="cform__field">[text* your-kana]</div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">お電話番号</div>
+    <div class="cform__field">[tel your-tel]</div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">メールアドレス <span class="req">- 必須</span></div>
+    <div class="cform__field">[email* your-email]</div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">お問い合わせ内容 <span class="req">- 必須</span></div>
+    <div class="cform__field">[textarea* your-message]</div>
+  </div>
+
+  <div class="cform__row">
+    <div class="cform__label">プライバシーポリシー</div>
+    <div class="cform__field">
+      <div class="cform__policy">
+        <p>togu（以下、「当サロン」という。）は、業務内にて取得・使用する個人情報（お名前・電子メールアドレス・お電話番号・ご住所など、個人を特定できる情報。以下、「個人情報」という。）の保護のため、個人情報の保護に関する方針（以下、「本方針」という。）を以下の通り定め、必要な施策の実施およびそれらの継続的な維持・改善に努めます。</p>
+        <p>個人情報の利用目的<br>当社は、個人情報を、お問合わせへの返答やサービスの提供などの業務上必要な範囲で利用するものとします。</p>
+      </div>
+      [acceptance acceptance-1] 上記にご同意いただいた上で、左のチェックボックスにチェックを入れてください。 [/acceptance]
+    </div>
+  </div>
+
+  <div class="cform__submit">
+    [submit "確認画面へ"]
+  </div>
+
+</div>
+
+
+----------------------------------------------------------
+【メール】タブ — 設定例
+----------------------------------------------------------
+送信先（To）       : info@togu-spa.jp など受信したいアドレス
+送信元（From）     : [_site_admin_email]
+題名（Subject）    : 【TOGU お問い合わせ】[subject] / [your-name] 様
+追加ヘッダー       : Reply-To: [your-email]
+
+メッセージ本文：
+----------------------------------------------------------
+TOGU ウェブサイトのお問い合わせフォームより送信されました。
+
+■ 件名         : [subject]
+■ 氏名         : [your-name]
+■ フリガナ     : [your-kana]
+■ お電話番号   : [your-tel]
+■ メールアドレス: [your-email]
+
+■ お問い合わせ内容
+[your-message]
+
+--
+このメールは [_site_title]（[_site_url]）のお問い合わせフォームから送信されました。
+送信日時: [_date] [_time]
+----------------------------------------------------------
+
+
+==========================================================
+ 補足：「確認画面へ」（確認ステップ）について
+==========================================================
+Contact Form 7 単体には「入力内容の確認画面」機能はありません（押すとそのまま送信されます）。
+確認画面を入れたい場合は、以下いずれかのアドオンを追加してください：
+
+  ・「Contact Form 7 Multi-Step Forms」
+  ・「Contact Form 7 add confirm」 など
+
+アドオン導入後、確認ステップ用のボタンタグ（例: [multistep ...] や [confirm "確認画面へ"]）に
+[submit "確認画面へ"] を差し替えます（各アドオンの説明に従ってください）。
+
+確認画面が不要であれば、ボタン文言を [submit "送信する"] に変更することをおすすめします。
