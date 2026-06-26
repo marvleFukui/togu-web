@@ -33,9 +33,10 @@ body {
   font-family: var(--serif);
   color: var(--text);
   background: var(--bg);
-  line-height: 1.24; /* body text leading (-35% from 1.9) */
+  line-height: 1.5; /* body text leading */
   font-size: 16px;
   letter-spacing: .028em; /* base body tracking (-30%) */
+  font-feature-settings: "palt"; /* 文字詰め（プロポーショナルメトリクス） */
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
