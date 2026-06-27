@@ -22,7 +22,7 @@
   --max:       1120px;
 
   --serif: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HG明朝E", "MS PMincho", serif;
-  --lato:  "Lato", var(--serif);
+  --lato:  "Lato", "Helvetica Neue", "Hiragino Kaku Gothic ProN", Arial, sans-serif;
 }
 
 /* ----- reset ----- */
@@ -473,7 +473,7 @@ body.nav-open .drawer { opacity: 1; visibility: visible; }
 .method-circle .sub { font-size: .82rem; color: var(--text-faint); margin-top: -.4em; }
 .method-circle .jp { font-size: .82rem; line-height: 1.5; color: var(--text-soft); }
 .back-to-face__title { font-family: var(--lato); font-weight: 300; font-size: clamp(1.2rem, 2.4vw, 1.5rem); letter-spacing: .18em; margin-bottom: 1em; }
-.back-to-face p { color: var(--text-soft); max-width: 680px; margin: 50px auto 0; }
+.back-to-face p { color: var(--text-soft); max-width: 680px; margin: 5px auto 0; }
 
 /* TREATMENT FLOW */
 .flow { padding: clamp(4rem, 9vw, 6rem) 0; }
