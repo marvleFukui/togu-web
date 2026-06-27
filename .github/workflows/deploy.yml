@@ -1,0 +1,54 @@
+name: Deploy to Xserver (test)
+
+# main へ push すると test.togu.site へ自動デプロイします。
+# 手動実行（Actions タブ → Run workflow）も可能です。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-test
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # --- 静的サイト → 公開フォルダ直下（test.togu.site/） ---
+      # WordPress 本体(news/)・テーマソース(wordpress-theme/)・Git関連は除外。
+      - name: Deploy static site to docroot
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: togu.site/public_html/test/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            wordpress-theme/**
+            news/**
+            **/*.md
+            **/*.pdf
+            **/.DS_Store
+            **/node_modules/**
+
+      # --- WordPress テーマ → wp-content/themes/togu-news/ ---
+      - name: Deploy WordPress theme
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: togu.site/public_html/test/news/wp-content/themes/togu-news/
+          local-dir: ./wordpress-theme/togu-news/
