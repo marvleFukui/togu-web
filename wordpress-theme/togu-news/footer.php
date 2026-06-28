@@ -12,14 +12,14 @@
       </div>
       <div class="site-footer__right">
         <nav class="footer-nav">
-          <a href="<?php echo esc_url($base); ?>index.html">HOME</a>
-          <a href="<?php echo esc_url($base); ?>concept.html">CONCEPT</a>
-          <a href="<?php echo esc_url($base); ?>service.html">SERVICE</a>
-          <a href="<?php echo esc_url($base); ?>salon.html">SALON</a>
-          <a href="<?php echo esc_url($base); ?>beforeafter.html">BEFORE / AFTER</a>
-          <a href="<?php echo esc_url($base); ?>faq.html">FAQ</a>
-          <a href="<?php echo esc_url($base); ?>product.html">PRODUCT</a>
-          <a href="<?php echo esc_url($base); ?>contact.html">CONTACT</a>
+          <a href="<?php echo esc_url($base); ?>">HOME</a>
+          <a href="<?php echo esc_url($base); ?>concept">CONCEPT</a>
+          <a href="<?php echo esc_url($base); ?>service">SERVICE</a>
+          <a href="<?php echo esc_url($base); ?>salon">SALON</a>
+          <a href="<?php echo esc_url($base); ?>beforeafter">BEFORE / AFTER</a>
+          <a href="<?php echo esc_url($base); ?>faq">FAQ</a>
+          <a href="<?php echo esc_url($base); ?>product">PRODUCT</a>
+          <a href="<?php echo esc_url(home_url('contact/')); ?>">CONTACT</a>
         </nav>
         <div class="footer-sns">
           <a class="sns-ico" data-link="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook">

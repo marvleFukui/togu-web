@@ -1,0 +1,23 @@
+# ===== TOGU 静的サイト : クリーンURL（.html を隠す） =====
+# Apache(エックスサーバー)用。WordPress(/news/ 配下)は対象外。
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # WordPress(/news/ 配下)はこの.htaccessでは触らない（/news/内の.htaccessが処理）
+  RewriteRule ^news(/|$) - [L]
+
+  # /index.html ・ /index は / に集約（301）
+  RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+  RewriteRule ^ / [R=301,L]
+
+  # /xxx.html への直アクセスは /xxx へリダイレクト（アドレスバーから .html を消す）
+  RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # 拡張子なしURLは対応する .html を内部配信（その .html が存在する場合のみ）
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>

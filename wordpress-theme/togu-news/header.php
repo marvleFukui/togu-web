@@ -9,17 +9,17 @@
 
 <!-- ===================== Header ===================== -->
 <header class="site-header" data-solid="true">
-  <a href="<?php echo esc_url($base); ?>index.html" class="site-header__logo" aria-label="TOGU">
+  <a href="<?php echo esc_url($base); ?>" class="site-header__logo" aria-label="TOGU">
     <img class="logo-wh" src="<?php echo esc_url($base); ?>images/common/logo-wh.svg" alt="TOGU">
     <img class="logo-bk" src="<?php echo esc_url($base); ?>images/common/logo-bk.svg" alt="TOGU">
   </a>
   <nav class="gnav">
     <ul class="gnav__list">
-      <li><a href="<?php echo esc_url($base); ?>index.html">HOME</a></li>
-      <li><a href="<?php echo esc_url($base); ?>concept.html">CONCEPT</a></li>
-      <li><a href="<?php echo esc_url($base); ?>service.html">SERVICE</a></li>
-      <li><a href="<?php echo esc_url($base); ?>salon.html">SALON</a></li>
-      <li><a href="<?php echo esc_url($base); ?>faq.html">FAQ</a></li>
+      <li><a href="<?php echo esc_url($base); ?>">HOME</a></li>
+      <li><a href="<?php echo esc_url($base); ?>concept">CONCEPT</a></li>
+      <li><a href="<?php echo esc_url($base); ?>service">SERVICE</a></li>
+      <li><a href="<?php echo esc_url($base); ?>salon">SALON</a></li>
+      <li><a href="<?php echo esc_url($base); ?>faq">FAQ</a></li>
       <li><a href="<?php echo esc_url(home_url('/')); ?>">NEWS</a></li>
     </ul>
     <div class="header-actions">
@@ -44,12 +44,12 @@
 </header>
 
 <div class="drawer">
-  <a href="<?php echo esc_url($base); ?>index.html">HOME</a>
-  <a href="<?php echo esc_url($base); ?>concept.html">CONCEPT</a>
-  <a href="<?php echo esc_url($base); ?>service.html">SERVICE</a>
-  <a href="<?php echo esc_url($base); ?>salon.html">SALON</a>
-  <a href="<?php echo esc_url($base); ?>beforeafter.html">BEFORE / AFTER</a>
-  <a href="<?php echo esc_url($base); ?>faq.html">FAQ</a>
+  <a href="<?php echo esc_url($base); ?>">HOME</a>
+  <a href="<?php echo esc_url($base); ?>concept">CONCEPT</a>
+  <a href="<?php echo esc_url($base); ?>service">SERVICE</a>
+  <a href="<?php echo esc_url($base); ?>salon">SALON</a>
+  <a href="<?php echo esc_url($base); ?>beforeafter">BEFORE / AFTER</a>
+  <a href="<?php echo esc_url($base); ?>faq">FAQ</a>
   <a href="<?php echo esc_url(home_url('/')); ?>">NEWS</a>
   <a data-link="line" href="#" target="_blank" rel="noopener">RESERVATION</a>
   <div class="drawer-sns">
