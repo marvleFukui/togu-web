@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          server-dir: togu.site/public_html/test/
+          server-dir: test/
           local-dir: ./
           exclude: |
             **/.git*
@@ -50,5 +50,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          server-dir: togu.site/public_html/test/news/wp-content/themes/togu-news/
+          server-dir: test/news/wp-content/themes/togu-news/
           local-dir: ./wordpress-theme/togu-news/
