@@ -6,12 +6,19 @@ if (!defined('ABSPATH')) exit;
 
 /**
  * 静的サイト（TOP等）の公開先ベースURL。
- * 例) 静的サイトが https://togu.com/ にあり、WordPress を https://togu.com/news/ に設置する場合は '/' のままでOK。
- *     別ドメインに置く場合は 'https://togu.com/' のように絶対URLを指定してください。
+ * 既定では「ドメイン直下」を絶対URLで自動算出します（静的サイトがドメイン直下、
+ * WordPress が /news/ などサブディレクトリにある構成）。
+ * 絶対URLにするのは、wp_enqueue_style/script がルート相対パス('/assets/...')に
+ * WordPress設置パス(/news/)を前置してしまうのを防ぐためです。
+ * 静的サイトを別ドメイン/別パスに置く場合は、wp-config.php 等で先に
+ * define('TOGU_SITE_BASE', 'https://example.com/'); のように定義してください。
  * ここで指定した場所の assets/css/style.css, assets/js/*.js, images/ を共有します。
  */
 if (!defined('TOGU_SITE_BASE')) {
-  define('TOGU_SITE_BASE', '/');
+  $togu_home = wp_parse_url(home_url('/'));
+  $togu_root = $togu_home['scheme'] . '://' . $togu_home['host']
+    . (empty($togu_home['port']) ? '' : ':' . $togu_home['port']) . '/';
+  define('TOGU_SITE_BASE', $togu_root);
 }
 
 function togu_setup() {
