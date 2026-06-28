@@ -30,13 +30,23 @@ function togu_setup() {
 }
 add_action('after_setup_theme', 'togu_setup');
 
+/**
+ * 共有アセット（静的サイト側のCSS/JS）のキャッシュバスター用バージョン。
+ * 静的サイトは WordPress 設置ディレクトリの1つ上（ドメイン直下）にある想定で、
+ * ファイルの更新時刻(filemtime)を ?ver= に付与し、更新時に自動で最新を読ませます。
+ */
+function togu_asset_ver($relpath) {
+  $file = dirname(ABSPATH) . '/' . ltrim($relpath, '/');
+  return file_exists($file) ? filemtime($file) : null;
+}
+
 function togu_assets() {
   $base = TOGU_SITE_BASE;
   wp_enqueue_style('togu-fonts', 'https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap', array(), null);
-  wp_enqueue_style('togu-main', $base . 'assets/css/style.css', array(), null);
+  wp_enqueue_style('togu-main', $base . 'assets/css/style.css', array(), togu_asset_ver('assets/css/style.css'));
   // 静的サイトと同じ JS を共有（ヘッダー挙動・ドロワー・アーカイブ開閉・外部リンク注入）
-  wp_enqueue_script('togu-config', $base . 'assets/js/config.js', array(), null, true);
-  wp_enqueue_script('togu-main', $base . 'assets/js/main.js', array('togu-config'), null, true);
+  wp_enqueue_script('togu-config', $base . 'assets/js/config.js', array(), togu_asset_ver('assets/js/config.js'), true);
+  wp_enqueue_script('togu-main', $base . 'assets/js/main.js', array('togu-config'), togu_asset_ver('assets/js/main.js'), true);
 }
 add_action('wp_enqueue_scripts', 'togu_assets');
 
