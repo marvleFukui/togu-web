@@ -14,7 +14,8 @@ window.TOGU_CONFIG = {
   WP_API_BASE: null,
 
   // お問い合わせ送信完了後に遷移するサンクスページのURL
-  THANKS_URL: "thanks.html",
+  // WordPress(/news/)のサンクス固定ページ。ルート相対なので本番でもそのまま動作。
+  THANKS_URL: "/news/thanks/",
 
   // 外部リンク
   LINE_URL: "https://line.me/R/ti/p/@744cwkjd?ts=06051343&oat_content=url",
