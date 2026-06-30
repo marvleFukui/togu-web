@@ -1,14 +1,15 @@
-name: Deploy to Xserver (test)
+name: Deploy to Xserver (production togu.site)
 
-# main へ push すると test.togu.site へ自動デプロイします。
-# 手動実行（Actions タブ → Run workflow）も可能です。
+# main へ push すると本番 togu.site へ自動デプロイします。
+# 静的サイト→公開フォルダ直下(togu.site/)、テーマ→/news/wp-content/themes/togu-news/
+# WordPress本体(news/)・staging(test/)は除外して保護。
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: deploy-test
+  group: deploy-prod
   cancel-in-progress: true
 
 jobs:
@@ -18,8 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # --- 静的サイト → 公開フォルダ直下（test.togu.site/） ---
-      # WordPress 本体(news/)・テーマソース(wordpress-theme/)・Git関連は除外。
+      # --- 静的サイト → 本番公開フォルダ直下（togu.site/） ---
       - name: Deploy static site to docroot
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          server-dir: test/
+          server-dir: ./
           local-dir: ./
           exclude: |
             **/.git*
@@ -36,25 +36,14 @@ jobs:
             **/.github/**
             wordpress-theme/**
             news/**
+            test/**
             **/*.md
             **/*.pdf
             **/.DS_Store
             **/node_modules/**
 
-      # --- WordPress テーマ → wp-content/themes/togu-news/ ---
-      - name: Deploy WordPress theme
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          server-dir: test/news/wp-content/themes/togu-news/
-          local-dir: ./wordpress-theme/togu-news/
-
       # --- WordPress テーマ → 本番 /news/wp-content/themes/togu-news/ ---
-      - name: Deploy WordPress theme (production /news/)
+      - name: Deploy WordPress theme
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
