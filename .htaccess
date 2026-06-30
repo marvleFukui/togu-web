@@ -2,6 +2,9 @@
 # Apache(エックスサーバー)用。WordPress(/news/ 配下)は対象外。
 Options -MultiViews
 
+# トップは静的サイトの index.html を最優先（旧サイトの index.php より先に）
+DirectoryIndex index.html index.php
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 

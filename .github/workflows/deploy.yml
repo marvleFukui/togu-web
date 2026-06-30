@@ -52,3 +52,15 @@ jobs:
           port: 21
           server-dir: test/news/wp-content/themes/togu-news/
           local-dir: ./wordpress-theme/togu-news/
+
+      # --- WordPress テーマ → 本番 /news/wp-content/themes/togu-news/ ---
+      - name: Deploy WordPress theme (production /news/)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: news/wp-content/themes/togu-news/
+          local-dir: ./wordpress-theme/togu-news/
