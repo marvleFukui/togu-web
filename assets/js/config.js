@@ -11,7 +11,7 @@
    ========================================================= */
 window.TOGU_CONFIG = {
   // 例: "https://example.com" （WordPressのサイトURL）
-  WP_API_BASE: null,
+  WP_API_BASE: "/news",
 
   // お問い合わせ送信完了後に遷移するサンクスページのURL
   // WordPress(/news/)のサンクス固定ページ。ルート相対なので本番でもそのまま動作。

@@ -85,9 +85,9 @@
 
   /* ---------- News (WordPress REST API) ---------- */
   var SAMPLE_NEWS = [
-    { category: "NEWS",  date: "2025.09.01", title: "ホームページを公開いたしました。", link: "news.html" },
-    { category: "MEDIA", date: "2025.08.20", title: "東京・渋谷でのプライベートサロン施術日程のお知らせ。", link: "news.html" },
-    { category: "BLOG",  date: "2025.08.05", title: "季節のアロマセレクションを更新しました。", link: "news.html" }
+    { category: "NEWS",  date: "2025.09.01", title: "ホームページを公開いたしました。", link: "/news/" },
+    { category: "MEDIA", date: "2025.08.20", title: "東京・渋谷でのプライベートサロン施術日程のお知らせ。", link: "/news/" },
+    { category: "BLOG",  date: "2025.08.05", title: "季節のアロマセレクションを更新しました。", link: "/news/" }
   ];
 
   function fmtDate(iso) {
@@ -110,7 +110,7 @@
     items.slice(0, limit).forEach(function (item) {
       var a = document.createElement("a");
       a.className = "news-list__item";
-      a.href = item.link || "news.html";
+      a.href = item.link || "/news/";
       a.innerHTML =
         '<span class="news-cat">' + (item.category || "NEWS") + "</span>" +
         '<span class="news-date">' + item.date + "</span>" +
@@ -142,7 +142,7 @@
             category: cat,
             date: fmtDate(p.date),
             title: (p.title && p.title.rendered) || "(無題)",
-            link: "news.html?id=" + p.id
+            link: p.link || "/news/"
           };
         });
         renderNews(container, items, limit);

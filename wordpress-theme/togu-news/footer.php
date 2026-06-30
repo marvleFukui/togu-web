@@ -18,7 +18,6 @@
           <a href="<?php echo esc_url($base); ?>salon">SALON</a>
           <a href="<?php echo esc_url($base); ?>beforeafter">BEFORE / AFTER</a>
           <a href="<?php echo esc_url($base); ?>faq">FAQ</a>
-          <a href="<?php echo esc_url($base); ?>product">PRODUCT</a>
           <a href="<?php echo esc_url(home_url('contact/')); ?>">CONTACT</a>
         </nav>
         <div class="footer-sns">
